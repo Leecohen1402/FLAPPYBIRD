@@ -71,3 +71,4 @@ public class Player {
     public void paint(Graphics graphics) {
     }
 }
+//סתם

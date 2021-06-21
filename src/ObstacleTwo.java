@@ -55,3 +55,4 @@ public class ObstacleTwo {
         this.x++;
     }
 }
+//סתם

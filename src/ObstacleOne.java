@@ -12,7 +12,7 @@ public class ObstacleOne {
         graphics.fillRect(x,y,width,hight);
     }
 
-
+//סתם
     public ObstacleOne(int x, int y, int width, int hight) {
         this.x = x;
         this.y = y;

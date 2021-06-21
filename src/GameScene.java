@@ -83,8 +83,7 @@ public class GameScene extends JPanel {
         }
         if (this.bird.isAlive())
             this.bird.paint(graphics);
-
-
+        
     }
 
     private void rules() {
