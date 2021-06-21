@@ -19,6 +19,16 @@ public class Player {
         this.icon.paintIcon(gameScene, graphics, this.x, this.y);
     }
 
+    public void move(int direction) {
+        switch (direction){
+            case Definition.MOVE_UP:
+                this.hight ++;
+                break;
+            case Definition.MOVE_DOWN:
+                this.hight --;
+                break;
+        }
+    }
     public ImageIcon getIcon() {
         return icon;
     }
@@ -59,7 +69,7 @@ public class Player {
         this.hight = hight;
     }
 
-    public void moveRight() {this.x++;}
+
 
     public boolean isAlive() {
         return alive;
@@ -70,4 +80,5 @@ public class Player {
 
     public void paint(Graphics graphics) {
     }
+
 }

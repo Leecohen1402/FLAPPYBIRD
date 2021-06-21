@@ -8,7 +8,7 @@ public class ObstacleThree {
     private int hight;
 
     public void paint (Graphics graphics){
-        graphics.setColor(Color.BLACK);
+        graphics.setColor(Color.CYAN);
         graphics.fillRect(x,y,width,hight);
     }
 
@@ -50,9 +50,6 @@ public class ObstacleThree {
 
     public void setHight(int hight) {
         this.hight = hight;
-    }
-    public void moveRight(){
-        this.x++;
     }
 }
 

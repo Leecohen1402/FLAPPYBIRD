@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Game extends JFrame {
+
+
     public static void main(String[] args) {
          new Game();
 
@@ -9,8 +11,7 @@ public class Game extends JFrame {
 
     public Game(){
         this.init();
-        //this.rules();
-        // this.agreeButton();
+
     }
 
     private void init(){
