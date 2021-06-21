@@ -17,11 +17,6 @@ public class Definition {
     public static final int TEXT_WIDTH2 = 900;
     public static final int TEXT_HIGHT2 = 70;
 
-    public static final int TEXT_X3 = 20;
-    public static final int TEXT_Y3 = 90;
-    public static final int TEXT_WIDTH3 = 900;
-    public static final int TEXT_HIGHT3 = 90;
-
     public static final int BUTTON_X = 400;
     public static final int BUTTON_Y = 300;
     public static final int BUTTON_WIDTH = 200;

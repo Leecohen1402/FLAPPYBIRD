@@ -34,7 +34,7 @@ public class GameScene extends JPanel {
         this.obstacleOne = new ObstacleOne(Definition.OBSTACLE_ONE_X, Definition.OBSTACLE_ONE_Y, Definition.OBSTACLE_ONE_WIDTH, Definition.OBSTACLE_ONE_HIGHT);
         this.obstaclesTwo = new ObstacleTwo(Definition.OBSTACLE_TWO_X, Definition.OBSTACLE_TWO_Y, Definition.OBSTACLE_TWO_WIDTH, Definition.OBSTACLE_TWO_HIGHT);
         this.obstacleThree = new ObstacleThree(Definition.OBSTACLE_THREE_X, Definition.OBSTACLE_THREE_Y, Definition.OBSTACLE_THREE_WIDTH, Definition.OBSTACLE_THREE_HIGHT);
-        Animation animation = new Animation(this.bird);  
+        Animation animation = new Animation(this.bird);
         this.addKeyListener(animation);
         mainGameLoop();
 
@@ -45,6 +45,7 @@ public class GameScene extends JPanel {
             while (true) {
                 repaint();
                 try {
+
                     Thread.sleep(50);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -92,5 +93,16 @@ public class GameScene extends JPanel {
 
     }
 
-
+    private boolean collision (Player bird, Obstacles obstacles, ObstacleOne obstacleOne, ObstacleTwo obstaclesTwo, ObstacleThree obstacleThree){
+        Rectangle birdRectangle = new Rectangle(bird.getX(),bird.getY(),bird.getWidth(),bird.getHight());
+        Rectangle obstaclesRectangle = new Rectangle(obstacles.getX(),obstacles.getY(),obstacles.getWidth(),obstacles.getHight());
+        Rectangle obstacleOneRectangle = new Rectangle(obstacleOne.getX(),obstacleOne.getY(),obstacleOne.getWidth(),obstacleOne.getHight());
+        Rectangle obstacleTwoRectangle = new Rectangle(obstaclesTwo.getX(),obstaclesTwo.getY(),obstaclesTwo.getWidth(),obstaclesTwo.getHight());
+        Rectangle obstacleThreeRectangle = new Rectangle(obstacleThree.getX(),obstacleThree.getY(),obstacleThree.getWidth(),obstacleThree.getHight());
+        boolean collision1 = birdRectangle.intersects(obstaclesRectangle);
+        boolean collision2 = birdRectangle.intersects(obstacleOneRectangle);
+        boolean collision3 = birdRectangle.intersects(obstacleTwoRectangle);
+        boolean collision4 = birdRectangle.intersects(obstacleThreeRectangle);
+        return collision1;
+    }
 }
