@@ -43,6 +43,18 @@ public class GameScene extends JPanel {
     public void mainGameLoop() {
         new Thread(() -> {
             while (true) {
+                if (collision1(bird, obstacles)){
+                this.bird.setAlive(false);
+                }
+                if (collision2(bird,obstacleOne)){
+                    this.bird.setAlive(false);
+                }
+                if (collision3(bird,obstaclesTwo)){
+                    this.bird.setAlive(false);
+                }
+                if (collision4(bird, obstacleThree)){
+                    this.bird.setAlive(false);
+                }
                 repaint();
                 try {
 
@@ -71,7 +83,9 @@ public class GameScene extends JPanel {
                 this.gameRules3.setVisible(false);
                 this.bird.paint(graphics, this);
                 this.setBackground(Color.WHITE);
-                this.player.paintIcon(this, graphics, Definition.PAINT_ICONE_X, Definition.PAINT_ICONE_Y);
+                if (this.bird.isAlive()) {
+                    this.player.paintIcon(this, graphics, Definition.PAINT_ICONE_X, Definition.PAINT_ICONE_Y);
+                }
                 this.obstacles.paint(graphics);
                 this.obstacleOne.paint(graphics);
                 this.obstaclesTwo.paint(graphics);
@@ -93,16 +107,31 @@ public class GameScene extends JPanel {
 
     }
 
-    private boolean collision (Player bird, Obstacles obstacles, ObstacleOne obstacleOne, ObstacleTwo obstaclesTwo, ObstacleThree obstacleThree){
+    private boolean collision1 (Player bird, Obstacles obstacles){
         Rectangle birdRectangle = new Rectangle(bird.getX(),bird.getY(),bird.getWidth(),bird.getHight());
         Rectangle obstaclesRectangle = new Rectangle(obstacles.getX(),obstacles.getY(),obstacles.getWidth(),obstacles.getHight());
-        Rectangle obstacleOneRectangle = new Rectangle(obstacleOne.getX(),obstacleOne.getY(),obstacleOne.getWidth(),obstacleOne.getHight());
-        Rectangle obstacleTwoRectangle = new Rectangle(obstaclesTwo.getX(),obstaclesTwo.getY(),obstaclesTwo.getWidth(),obstaclesTwo.getHight());
-        Rectangle obstacleThreeRectangle = new Rectangle(obstacleThree.getX(),obstacleThree.getY(),obstacleThree.getWidth(),obstacleThree.getHight());
         boolean collision1 = birdRectangle.intersects(obstaclesRectangle);
-        boolean collision2 = birdRectangle.intersects(obstacleOneRectangle);
-        boolean collision3 = birdRectangle.intersects(obstacleTwoRectangle);
-        boolean collision4 = birdRectangle.intersects(obstacleThreeRectangle);
         return collision1;
+    }
+
+    private boolean collision2 (Player bird, ObstacleOne obstacleOne){
+        Rectangle birdRectangle = new Rectangle(bird.getX(),bird.getY(),bird.getWidth(),bird.getHight());
+        Rectangle obstacleOneRectangle = new Rectangle(obstacleOne.getX(),obstacleOne.getY(),obstacleOne.getWidth(),obstacleOne.getHight());
+        boolean collision2 = birdRectangle.intersects(obstacleOneRectangle);
+        return collision2;
+    }
+
+    private boolean collision3 (Player bird, ObstacleTwo obstaclesTwo){
+        Rectangle birdRectangle = new Rectangle(bird.getX(),bird.getY(),bird.getWidth(),bird.getHight());
+        Rectangle obstacleTwoRectangle = new Rectangle(obstaclesTwo.getX(),obstaclesTwo.getY(),obstaclesTwo.getWidth(),obstaclesTwo.getHight());
+        boolean collision3 = birdRectangle.intersects(obstacleTwoRectangle);
+        return collision3;
+    }
+
+    private boolean collision4 (Player bird, ObstacleThree obstacleThree){
+        Rectangle birdRectangle = new Rectangle(bird.getX(),bird.getY(),bird.getWidth(),bird.getHight());
+        Rectangle obstacleThreeRectangle = new Rectangle(obstacleThree.getX(),obstacleThree.getY(),obstacleThree.getWidth(),obstacleThree.getHight());
+        boolean collision4 = birdRectangle.intersects(obstacleThreeRectangle);
+        return collision4;
     }
 }

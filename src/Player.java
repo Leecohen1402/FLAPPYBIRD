@@ -13,6 +13,7 @@ public class Player {
         this.icon = new ImageIcon("image/bird.png");
         this.x = x;
         this.y = y;
+        this.alive = true;
     }
 
     public void paint(Graphics graphics, GameScene gameScene) {
