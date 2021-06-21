@@ -26,5 +26,5 @@ public class Game extends JFrame {
         this.add(gameScene);
 
     }
-//סתם
+
 }

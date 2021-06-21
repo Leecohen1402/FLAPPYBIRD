@@ -37,5 +37,4 @@ public class Definition {
     public static final int PLAYER_WIDTH = 100;
     public static final int PLAYER_HIGH = 100;
 
-//סתם
 }
