@@ -34,8 +34,9 @@ public class GameScene extends JPanel {
         this.obstacleOne = new ObstacleOne(Definition.OBSTACLE_ONE_X, Definition.OBSTACLE_ONE_Y, Definition.OBSTACLE_ONE_WIDTH, Definition.OBSTACLE_ONE_HIGHT);
         this.obstaclesTwo = new ObstacleTwo(Definition.OBSTACLE_TWO_X, Definition.OBSTACLE_TWO_Y, Definition.OBSTACLE_TWO_WIDTH, Definition.OBSTACLE_TWO_HIGHT);
         this.obstacleThree = new ObstacleThree(Definition.OBSTACLE_THREE_X, Definition.OBSTACLE_THREE_Y, Definition.OBSTACLE_THREE_WIDTH, Definition.OBSTACLE_THREE_HIGHT);
-        this.addKeyListener(new Animation(bird));
-        this.mainGameLoop();
+        Animation animation = new Animation(this.bird);  
+        this.addKeyListener(animation);
+        mainGameLoop();
 
     }
 
