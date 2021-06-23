@@ -24,7 +24,6 @@ public class Definition {
 
     public static final int MENU = 0;
     public static final int GAME_SCENE = 1;
-
     public static final int GAME_SCENE_BOUNDS = 0;
 
     public static final int PLAYER_X4 = 60;
@@ -34,6 +33,8 @@ public class Definition {
 
     public static final int MOVE_UP = 1;
     public static final int MOVE_DOWN = 2;
+    public static final int MOVE_RIGHT = 3;
+    public static final int MOVE_LEFT = 4;
 
     public static final int BIRD_PLAYER_X = 300;
     public static final int BIRD_PLAYER_Y = 400;
