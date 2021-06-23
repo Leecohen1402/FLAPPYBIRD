@@ -21,15 +21,23 @@ public class Player {
     }
 
     public void move(int direction) {
-        switch (direction){
+        switch (direction) {
             case Definition.MOVE_UP:
-                this.hight ++;
+                this.y--;
                 break;
             case Definition.MOVE_DOWN:
-                this.hight --;
+                this.y++;
+                break;
+            case Definition.MOVE_RIGHT:
+                this.x++;
+                break;
+            case Definition.MOVE_LEFT:
+                this.x--;
                 break;
         }
+
     }
+
     public ImageIcon getIcon() {
         return icon;
     }
@@ -70,16 +78,16 @@ public class Player {
         this.hight = hight;
     }
 
-
-
     public boolean isAlive() {
         return alive;
     }
+
     public void setAlive(boolean alive) {
         this.alive = alive;
     }
 
     public void paint(Graphics graphics) {
+
     }
 
 }
