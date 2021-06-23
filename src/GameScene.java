@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.net.URL;
 
 public class GameScene extends JPanel {
@@ -14,10 +16,11 @@ public class GameScene extends JPanel {
     private JLabel gameRules1 = new JLabel();
     private JLabel gameRules2 = new JLabel();
     private JLabel gameRules3 = new JLabel();
+    private JButton iAgree;
 
     public GameScene() {
         this.setLayout(null);
-        JButton iAgree = new JButton("Let's start!");
+        iAgree = new JButton("Let's start!");
         iAgree.setBounds(Definition.BUTTON_X, Definition.BUTTON_Y, Definition.BUTTON_WIDTH, Definition.BUTTON_HIGHT);
         iAgree.addActionListener((event -> {
             this.sceneId = Definition.GAME_SCENE;
@@ -34,8 +37,8 @@ public class GameScene extends JPanel {
         this.obstacleOne = new ObstacleOne(Definition.OBSTACLE_ONE_X, Definition.OBSTACLE_ONE_Y, Definition.OBSTACLE_ONE_WIDTH, Definition.OBSTACLE_ONE_HIGHT);
         this.obstaclesTwo = new ObstacleTwo(Definition.OBSTACLE_TWO_X, Definition.OBSTACLE_TWO_Y, Definition.OBSTACLE_TWO_WIDTH, Definition.OBSTACLE_TWO_HIGHT);
         this.obstacleThree = new ObstacleThree(Definition.OBSTACLE_THREE_X, Definition.OBSTACLE_THREE_Y, Definition.OBSTACLE_THREE_WIDTH, Definition.OBSTACLE_THREE_HIGHT);
-        Animation animation = new Animation(this.bird);
-        this.addKeyListener(animation);
+//        Animation animation = new Animation(this.bird);
+
         mainGameLoop();
 
     }
@@ -43,16 +46,16 @@ public class GameScene extends JPanel {
     public void mainGameLoop() {
         new Thread(() -> {
             while (true) {
-                if (collision1(bird, obstacles)){
-                this.bird.setAlive(false);
-                }
-                if (collision2(bird,obstacleOne)){
+                if (collision1(bird, obstacles)) {
                     this.bird.setAlive(false);
                 }
-                if (collision3(bird,obstaclesTwo)){
+                if (collision2(bird, obstacleOne)) {
                     this.bird.setAlive(false);
                 }
-                if (collision4(bird, obstacleThree)){
+                if (collision3(bird, obstaclesTwo)) {
+                    this.bird.setAlive(false);
+                }
+                if (collision4(bird, obstacleThree)) {
                     this.bird.setAlive(false);
                 }
                 repaint();
@@ -77,6 +80,9 @@ public class GameScene extends JPanel {
                 this.gameRules3.setVisible(true);
                 break;
             case Definition.GAME_SCENE:
+                requestFocusInWindow();
+                addKeys();
+                iAgree.setVisible(false);
                 this.welcome.setVisible(false);
                 this.gameRules1.setVisible(false);
                 this.gameRules2.setVisible(false);
@@ -84,14 +90,40 @@ public class GameScene extends JPanel {
                 this.bird.paint(graphics, this);
                 this.setBackground(Color.WHITE);
                 if (this.bird.isAlive()) {
-                    this.player.paintIcon(this, graphics, Definition.PAINT_ICONE_X, Definition.PAINT_ICONE_Y);
+                    this.player.paintIcon(this, graphics, bird.getX(), bird.getY());
                 }
+
                 this.obstacles.paint(graphics);
                 this.obstacleOne.paint(graphics);
                 this.obstaclesTwo.paint(graphics);
                 this.obstacleThree.paint(graphics);
                 break;
         }
+
+    }
+
+    private void addKeys() {
+        addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                int keyCode = e.getKeyCode();
+                switch (keyCode) {
+                    case KeyEvent.VK_UP:
+                        bird.move(Definition.MOVE_UP);
+                        break;
+                    case KeyEvent.VK_DOWN:
+                        bird.move(Definition.MOVE_DOWN);
+                        break;
+                    case KeyEvent.VK_RIGHT:
+                        bird.move(Definition.MOVE_RIGHT);
+                        break;
+                    case KeyEvent.VK_LEFT:
+                        bird.move(Definition.MOVE_LEFT);
+                        break;
+                }
+                repaint();
+            }
+        });
     }
 
     private void rules() {
@@ -107,30 +139,30 @@ public class GameScene extends JPanel {
 
     }
 
-    private boolean collision1 (Player bird, Obstacles obstacles){
-        Rectangle birdRectangle = new Rectangle(bird.getX(),bird.getY(),bird.getWidth(),bird.getHight());
-        Rectangle obstaclesRectangle = new Rectangle(obstacles.getX(),obstacles.getY(),obstacles.getWidth(),obstacles.getHight());
+    private boolean collision1(Player bird, Obstacles obstacles) {
+        Rectangle birdRectangle = new Rectangle(bird.getX(), bird.getY(), bird.getWidth(), bird.getHight());
+        Rectangle obstaclesRectangle = new Rectangle(obstacles.getX(), obstacles.getY(), obstacles.getWidth(), obstacles.getHight());
         boolean collision1 = birdRectangle.intersects(obstaclesRectangle);
         return collision1;
     }
 
-    private boolean collision2 (Player bird, ObstacleOne obstacleOne){
-        Rectangle birdRectangle = new Rectangle(bird.getX(),bird.getY(),bird.getWidth(),bird.getHight());
-        Rectangle obstacleOneRectangle = new Rectangle(obstacleOne.getX(),obstacleOne.getY(),obstacleOne.getWidth(),obstacleOne.getHight());
+    private boolean collision2(Player bird, ObstacleOne obstacleOne) {
+        Rectangle birdRectangle = new Rectangle(bird.getX(), bird.getY(), bird.getWidth(), bird.getHight());
+        Rectangle obstacleOneRectangle = new Rectangle(obstacleOne.getX(), obstacleOne.getY(), obstacleOne.getWidth(), obstacleOne.getHight());
         boolean collision2 = birdRectangle.intersects(obstacleOneRectangle);
         return collision2;
     }
 
-    private boolean collision3 (Player bird, ObstacleTwo obstaclesTwo){
-        Rectangle birdRectangle = new Rectangle(bird.getX(),bird.getY(),bird.getWidth(),bird.getHight());
-        Rectangle obstacleTwoRectangle = new Rectangle(obstaclesTwo.getX(),obstaclesTwo.getY(),obstaclesTwo.getWidth(),obstaclesTwo.getHight());
+    private boolean collision3(Player bird, ObstacleTwo obstaclesTwo) {
+        Rectangle birdRectangle = new Rectangle(bird.getX(), bird.getY(), bird.getWidth(), bird.getHight());
+        Rectangle obstacleTwoRectangle = new Rectangle(obstaclesTwo.getX(), obstaclesTwo.getY(), obstaclesTwo.getWidth(), obstaclesTwo.getHight());
         boolean collision3 = birdRectangle.intersects(obstacleTwoRectangle);
         return collision3;
     }
 
-    private boolean collision4 (Player bird, ObstacleThree obstacleThree){
-        Rectangle birdRectangle = new Rectangle(bird.getX(),bird.getY(),bird.getWidth(),bird.getHight());
-        Rectangle obstacleThreeRectangle = new Rectangle(obstacleThree.getX(),obstacleThree.getY(),obstacleThree.getWidth(),obstacleThree.getHight());
+    private boolean collision4(Player bird, ObstacleThree obstacleThree) {
+        Rectangle birdRectangle = new Rectangle(bird.getX(), bird.getY(), bird.getWidth(), bird.getHight());
+        Rectangle obstacleThreeRectangle = new Rectangle(obstacleThree.getX(), obstacleThree.getY(), obstacleThree.getWidth(), obstacleThree.getHight());
         boolean collision4 = birdRectangle.intersects(obstacleThreeRectangle);
         return collision4;
     }
