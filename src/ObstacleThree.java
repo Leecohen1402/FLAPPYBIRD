@@ -6,6 +6,7 @@ public class ObstacleThree {
     private int y;
     private int width;
     private int hight;
+    private Rectangle box;
 
     public void paint (Graphics graphics){
         graphics.setColor(Color.CYAN);
@@ -14,6 +15,8 @@ public class ObstacleThree {
 
 
     public ObstacleThree(int x, int y, int width, int hight) {
+        box= new Rectangle();
+        box.setBounds(x,y,width,hight);
         this.x = x;
         this.y = y;
         this.width = width;
@@ -38,6 +41,10 @@ public class ObstacleThree {
 
     public int getWidth() {
         return width;
+    }
+
+    public Rectangle getBox() {
+        return box;
     }
 
     public void setWidth(int width) {

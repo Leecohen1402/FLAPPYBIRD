@@ -6,14 +6,17 @@ public class ObstacleOne {
     private int y;
     private int width;
     private int hight;
+    private Rectangle box;
 
-    public void paint (Graphics graphics){
+    public void paint(Graphics graphics) {
         graphics.setColor(Color.CYAN);
-        graphics.fillRect(x,y,width,hight);
+        graphics.fillRect(x, y, width, hight);
     }
 
 
     public ObstacleOne(int x, int y, int width, int hight) {
+        box = new Rectangle();
+        box.setBounds(x, y, width, hight);
         this.x = x;
         this.y = y;
         this.width = width;
@@ -46,6 +49,10 @@ public class ObstacleOne {
 
     public int getHight() {
         return hight;
+    }
+
+    public Rectangle getBox() {
+        return box;
     }
 
     public void setHight(int hight) {

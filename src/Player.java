@@ -8,31 +8,40 @@ public class Player {
     private int width;
     private int hight;
     private boolean alive;
+    private Rectangle box;
 
-    public Player(int x, int y) {
+    public Player(int x, int y, GameScene gameScene) {
         this.icon = new ImageIcon("image/bird.png");
         this.x = x;
         this.y = y;
         this.alive = true;
+        box = new Rectangle();
     }
 
     public void paint(Graphics graphics, GameScene gameScene) {
+        box.setBounds(x,y,Definition.PLAYER_WIDTH-45,Definition.PLAYER_HIGH-45);
+        if (x >= Definition.WINDOW_WIDTH-Definition.PLAYER_WIDTH)
+            gameScene.setSceneId(Definition.WIN);
         this.icon.paintIcon(gameScene, graphics, this.x, this.y);
     }
 
     public void move(int direction) {
         switch (direction) {
             case Definition.MOVE_UP:
-                this.y--;
+                if (y > 0)
+                    this.y -= 10;
                 break;
             case Definition.MOVE_DOWN:
-                this.y++;
+                if (y <= Definition.WINDOW_HIGHT-Definition.PLAYER_HIGH)
+                    this.y += 10;
                 break;
             case Definition.MOVE_RIGHT:
-                this.x++;
+                if (x <= Definition.WINDOW_WIDTH-Definition.PLAYER_WIDTH)
+                    this.x += 10;
                 break;
             case Definition.MOVE_LEFT:
-                this.x--;
+                if (x > 0)
+                    this.x -= 10;
                 break;
         }
 
@@ -90,4 +99,7 @@ public class Player {
 
     }
 
+    public Rectangle getBox() {
+        return box;
+    }
 }

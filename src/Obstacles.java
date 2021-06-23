@@ -2,11 +2,12 @@ import java.awt.*;
 
 public class Obstacles {
 
+
     private int x;
     private int y;
     private int width;
     private int hight;
-
+    private Rectangle box;
     public void paint (Graphics graphics){
         graphics.setColor(Color.cyan);
         graphics.fillRect(x,y,width,hight);
@@ -16,6 +17,8 @@ public class Obstacles {
     public Obstacles(int x, int y, int width, int hight) {
         this.x = x;
         this.y = y;
+        box= new Rectangle();
+        box.setBounds(x,y,width,hight);
         this.width = width;
         this.hight = hight;
     }
@@ -52,4 +55,7 @@ public class Obstacles {
         this.hight = hight;
     }
 
+    public Rectangle getBox() {
+        return box;
+    }
 }
